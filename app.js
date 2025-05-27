@@ -10,8 +10,8 @@ app.engine("ejs",engine);
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
-//app.use(methodOverride("_method"));
-// app.use(express.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
+app.use(express.urlencoded({extended:true}));
 
 //connect to MongoDB
 
@@ -30,29 +30,51 @@ async function main(){
 //home route
 app.get("/",(req,res)=>{res.send("home is working")});
 
-// listing route
-// app.get("/listings",async (req,res)=>{
-//     let sampleListing=new Listing({
-//         title:"Sample Listing",
-//         discription:"This is a sample listing description.",
-//        // image:"https://th.bing.com/th/id/OIP.jc9F2K6hEUYrWuCvoV1K4gHaFj?w=210&h=180&c=7&r=0&o=5&cb=iwc2&dpr=1.3&pid=1.7",
-//         price:100,
-//         location:"UP",
-//         country:"USA"
-//     });
-//     await sampleListing.save();
-//     console.log("Sample listing created");
-// });
-
 //show all the listings
-app.get("/allListinges",(req,res)=>{
-    Listing.find()
-    .then(data=>{
-        res.render("home.ejs",{allDataOfListings:data});
-    }).catch(err=>{
-        console.error("Error fetching listings:", err);
-    });
-})
+app.get("/listinges",async (req,res)=>{
+    const listinges=await Listing.find();
+    res.render("./listings/index.ejs",{allDataOfListings:listinges});
+    
+});
+//create a new listing
+app.get("/listinges/new",(req,res)=>{
+    res.render("./listings/new.ejs");
+});
+//save a new listing
+
+app.post("/listinges",async (req,res)=>{
+    const newListing=new Listing(req.body.listingObj);
+    await newListing.save();
+    res.redirect("/listinges");
+});
+//open a individual listing
+app.get("/listinges/:id",async (req,res)=>{
+    let {id}=req.params;
+    const findData=await Listing.findById(id);
+    res.render("./listings/show.ejs",{data:findData});
+});
+
+// //edit a listing
+
+app.get("/listinges/:id/edit",async (req,res)=>{
+    let {id}=req.params;
+    const findData=await Listing.findById(id);
+    res.render("./listings/edit.ejs",{data:findData});
+});
+//update a listing
+
+app.put("/listinges/:id",async (req,res)=>{
+    let {id}=req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listingObj});
+    res.redirect("/listinges");
+});
+
+//delete a listing
+app.delete("/listinges/:id",async (req,res)=>{
+    let {id}=req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listinges");
+});
 app.listen(8080,()=>{
     console.log("Server is running on port 8080");
 });
