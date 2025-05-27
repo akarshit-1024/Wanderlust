@@ -8,8 +8,8 @@ const app=express();
 
 app.engine("ejs",engine);
 app.set("view engine","ejs");
-//app.set("views",path.join(__dirname,"views"));
-//app.use(express.static(path.join(__dirname,"public")));
+app.set("views",path.join(__dirname,"views"));
+app.use(express.static(path.join(__dirname,"public")));
 //app.use(methodOverride("_method"));
 // app.use(express.urlencoded({extended:true}));
 
@@ -44,7 +44,15 @@ app.get("/",(req,res)=>{res.send("home is working")});
 //     console.log("Sample listing created");
 // });
 
-
+//show all the listings
+app.get("/allListinges",(req,res)=>{
+    Listing.find()
+    .then(data=>{
+        res.render("home.ejs",{allDataOfListings:data});
+    }).catch(err=>{
+        console.error("Error fetching listings:", err);
+    });
+})
 app.listen(8080,()=>{
     console.log("Server is running on port 8080");
 });
