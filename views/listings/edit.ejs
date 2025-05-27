@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit listing</h1>
+    <p>ID : <%= data.id%></p>
+    <form action="/listinges/<%=data.id%>?_method=PUT" method="POST">
+        <input type="text" name="listingObj[]"  value="<%= data.title %>" required>
+        <input type="text" name="listingObj[description]"value="<%= data.description %>" required>   
+        <input type="number" name="listingObj[price]"  value="<%= data.price %>" required>
+        <input type="text" name="listingObj[location]"  value="<%= data.location %>" required>
+        
+        <button>submit</button>
+    </form>
+    
+</body>
+</html>
