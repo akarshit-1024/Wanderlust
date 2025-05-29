@@ -2,11 +2,12 @@ const express=require("express");
 const mongoose=require("mongoose");
 const path=require("path");
 const methodOverride=require("method-override");
-const engine=require("ejs-mate");
+const ejsMate=require("ejs-mate");
 const Listing=require("./models/listing.js");
+const ExpressError=require("./ExpressError");
 const app=express();
 
-app.engine("ejs",engine);
+app.engine("ejs",ejsMate);
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
@@ -75,6 +76,26 @@ app.delete("/listinges/:id",async (req,res)=>{
     await Listing.findByIdAndDelete(id);
     res.redirect("/listinges");
 });
+
+//404 error handler
+const checkError=(req,res,next)=>{
+    const {token}=req.query;
+    if(token==="1234"){
+        next();
+    }
+    throw new ExpressError(401,"ACCESS DENIED");
+};
+
+app.get("/api",checkError,(req,res)=>{
+    res.send("API is working");
+});
+
+app.use((err,req,res,next)=>{
+    console.log("------Error Occurred------");
+    let {status, message} = err;
+    res.status(status).send(message);
+});
+
 app.listen(8080,()=>{
     console.log("Server is running on port 8080");
 });
