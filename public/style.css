@@ -40,3 +40,32 @@
     opacity: 0.2;
     background-color: #fff;
 }
+/*footer section area*/
+
+/* Footer styling */
+.footer {
+  color: #000;
+  text-align: center;
+  padding: 15px 0;
+  flex: 1;
+}
+
+.footer-icons {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.footer-icons i {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.footer-copy {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #000;
+  text-decoration: none;
+}
+/* footer section area end*/
