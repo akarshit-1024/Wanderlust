@@ -1,21 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<% layout("/layouts/boilerplate") -%>
 <body>
-    <h1>Edit listing</h1>
-    <p>ID : <%= data.id%></p>
-    <form action="/listinges/<%=data.id%>?_method=PUT" method="POST">
-        <input type="text" name="listingObj[]"  value="<%= data.title %>" required>
-        <input type="text" name="listingObj[description]"value="<%= data.description %>" required>   
-        <input type="number" name="listingObj[price]"  value="<%= data.price %>" required>
-        <input type="text" name="listingObj[location]"  value="<%= data.location %>" required>
-        
-        <button>submit</button>
-    </form>
-    
+  <h1 class="text-center mt-4 mb-4">Update your Profile</h1>
+  <form action="/listinges/<%=data._id%>?_method=PUT" method="POST">
+    <div class="mb-3 col-6 offset-3">
+      <label for="exampleInputEmail1" class="form-label">Title</label>
+      <input
+        type="email"
+        class="form-control"
+        name="listingObj[title]"
+        value="<%= data.title %>"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+    </div>
+
+    <div class="mb-3 col-6 offset-3">
+      <label for="exampleInputEmail1" class="form-label">Descrption</label>
+      <input
+        type="email"
+        class="form-control"
+        name="listingObj[description]"
+        value="<%= data.description %>"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+    </div>
+
+    <div class="mb-3 col-6 offset-3">
+      <label for="exampleInputEmail1" class="form-label">Location </label>
+      <input
+        type="text"
+        class="form-control"
+        name="listingObj[location]"
+        value="<%= data.location %>"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3 col-6 offset-3">
+      <input type="number" class="form-control" name="listingObj[price]"
+      value="<%= data.price.toLocaleString("en-IN") %>" placeholder="Price"
+      aria-label="Price" />
+    </div>
+    <div class="mb-3 col-6 offset-3">
+      <input
+        type="text"
+        class="form-control"
+        name="listingObj[country]"
+        value="<%= data.country %>"
+        placeholder="Country"
+        aria-label="Country"
+      />
+    </div>
+    <button class="btn btn-primary offset-3">Update</button>
+  </form>
 </body>
-</html>

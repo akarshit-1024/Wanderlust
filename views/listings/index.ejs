@@ -1,21 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
+<% layout("/layouts/boilerplate") -%>
 <body>
-    <h1>All listinges</h1>
-    <form action="/listinges/new" method="GET">
+  <h1>All listinges</h1>
+  <!-- <form action="/listinges/new" method="GET">
         <button>create new</button>
-    </form>
-    <ul>
-        <% for(let data of allDataOfListings){ %>
-            <li><a href="/listinges/<%=data.id%>"><%= data.title %></a></li>
-      <%  } %>
-
-    </ul>
+    </form> -->
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for(let data of allDataOfListings){ %>
+    <!--  Bootstrap card -->
+    <a href="/listinges/<%=data._id%>" class="text-decoration-none">
+      <div class="card card-2">
+        <img
+          src="<%=data.image%>"
+          class="card-img-top"
+          alt="..."
+          style="height: 20rem"
+        />
+        <div class="card-img-overlay">&#heart;</div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= data.title%></b><br />
+            <%= data.location%><br />
+            &#8377;<%= data.price.toLocaleString("en-IN")%> /night
+          </p>
+        </div>
+      </div>
+    </a>
+    <% } %>
+  </div>
 </body>
-</html>
