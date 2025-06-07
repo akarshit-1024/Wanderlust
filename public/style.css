@@ -1,3 +1,11 @@
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.warper{
+  flex: 1;
+}
 .navbar{
     height: 65px;
     background-color: #fff;
@@ -41,9 +49,6 @@
     background-color: #fff;
 }
 /*footer section area*/
-.warper{
-  flex:1;
-}
 /* Footer styling */
 .footer {
   color: #000;
