@@ -41,7 +41,9 @@
     background-color: #fff;
 }
 /*footer section area*/
-
+.warper{
+  flex:1;
+}
 /* Footer styling */
 .footer {
   color: #000;
