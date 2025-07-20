@@ -5,6 +5,7 @@ const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const Listing=require("./models/listing.js");
 const ExpressError=require("./ExpressError");
+const { deflateSync } = require("zlib");
 const app=express();
 
 app.engine("ejs",ejsMate);
@@ -69,7 +70,6 @@ app.put("/listinges/:id",async (req,res)=>{
     await Listing.findByIdAndUpdate(id,{...req.body.listingObj});
     res.redirect("/listinges");
 });
-
 //delete a listing
 app.delete("/listinges/:id",async (req,res)=>{
     let {id}=req.params;

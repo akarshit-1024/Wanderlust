@@ -76,3 +76,18 @@ body{
   text-decoration: none;
 }
 /* footer section area end*/
+/*listing image*/
+#show-1{
+  margin-bottom: 20px;
+}
+#listing-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+#btn-setting{
+  display: flex;
+  align-items: first baseline;
+
+}
