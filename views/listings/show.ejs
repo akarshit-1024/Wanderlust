@@ -6,9 +6,6 @@
       <img src="<%=data.image%>" alt="image" id="listing-img" />
     </div>
     <div class="col-6 offset-3">
-      <p>ID : <%= data.id%></p>
-    </div>
-    <div class="col-6 offset-3">
       <p>Title : <%= data.title%></p>
     </div>
     <div class="col-6 offset-3">
@@ -18,7 +15,7 @@
       <p>country : <%= data.country%></p>
     </div>
     <div class="col-6 offset-3">
-      <p>Price :&#8377; <%= data.price%></p>
+      <p>Price :&#8377; <%= data.price.toLocaleString("en-IN")%></p>
     </div>
     <div class="col-6 offset-3"id="btn-setting">
     <form action="/listinges/<%=data.id%>/edit" method="GET">
