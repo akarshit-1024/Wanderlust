@@ -4,8 +4,8 @@ const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const Listing=require("./models/listing.js");
-const ExpressError=require("./ExpressError");
-const { deflateSync } = require("zlib");
+const ExpressError=require("./utils/ExpressError.js");
+const wrapAsync= require("./utils/wrapAsync.js");
 const app=express();
 
 app.engine("ejs",ejsMate);
@@ -27,75 +27,65 @@ main().then(()=>{
 
 async function main(){
     await mongoose.connect(MONGO_URL);
-}
-
-//home route
-app.get("/",(req,res)=>{res.send("home is working")});
+} 
 
 //show all the listings
-app.get("/listinges",async (req,res)=>{
+app.get("/listinges",wrapAsync(async (req,res)=>{
     const listinges=await Listing.find();
     res.render("./listings/index.ejs",{allDataOfListings:listinges});
     
-});
+}));
 //create a new listing
 app.get("/listinges/new",(req,res)=>{
     res.render("./listings/new.ejs");
 });
 //save a new listing
 
-app.post("/listinges",async (req,res)=>{
+app.post("/listinges",wrapAsync(async (req,res)=>{
+    if(!req.body.listingObj){
+        throw new ExpressError(400,"Invalid Listing Data for listings");
+    };
     const newListing=new Listing(req.body.listingObj);
     await newListing.save();
     res.redirect("/listinges");
-});
+})
+);
 //open a individual listing
-app.get("/listinges/:id",async (req,res)=>{
+app.get("/listinges/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
     const findData=await Listing.findById(id);
     res.render("./listings/show.ejs",{data:findData});
-});
+})
+);
 
 // //edit a listing
 
-app.get("/listinges/:id/edit",async (req,res)=>{
+app.get("/listinges/:id/edit",wrapAsync(async (req,res)=>{
     let {id}=req.params;
     const findData=await Listing.findById(id);
     res.render("./listings/edit.ejs",{data:findData});
-});
+}));
 //update a listing
 
-app.put("/listinges/:id",async (req,res)=>{
+app.put("/listinges/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listingObj});
     res.redirect("/listinges");
-});
+}));
 //delete a listing
-app.delete("/listinges/:id",async (req,res)=>{
+app.delete("/listinges/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listinges");
-});
-
+}));
 //404 error handler
-const checkError=(req,res,next)=>{
-    const {token}=req.query;
-    if(token==="1234"){
-        next();
-    }
-    throw new ExpressError(401,"ACCESS DENIED");
-};
-
-app.get("/api",checkError,(req,res)=>{
-    res.send("API is working");
+app.all(/.*/,(req,res,next)=>{
+    next(new ExpressError(404,"Page Not Found"));
 });
-
-app.use((err,req,res,next)=>{
-    console.log("------Error Occurred------");
-    let {status, message} = err;
-    res.status(status).send(message);
-});
-
+app.use((err,req,res,next)=>{ 
+    let {status=500, message="something went wrong"} = err;
+    res.status(status).render("./listings/error.ejs", { status, message });
+}); 
 app.listen(8080,(err)=>{
     if(err){
         console.error("Error starting server:", err);
