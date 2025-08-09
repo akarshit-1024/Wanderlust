@@ -19,6 +19,7 @@ Built with **Node.js**, **Express**, **MongoDB**, and **EJS** for a full-stack e
 - **Other:** Multer (file uploads), Mapbox (optional for location maps)
 
 ## 📂 Folder Structure
+```
 Wanderlust/
 │
 ├── public/ # Static files (CSS, JS, images)
@@ -28,7 +29,7 @@ Wanderlust/
 ├── middleware/ # Custom middleware
 ├── app.js # Main application entry
 └── package.json
-
+```
 
 ## ⚡ Getting Started
 
