@@ -82,7 +82,7 @@ body{
 }
 #listing-img {
   width: 100%;
-  height: auto;
+  height: 40vh;
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -90,4 +90,8 @@ body{
   display: flex;
   align-items: first baseline;
 
+}
+::selection {
+  background: #eb4863; /* your custom highlight color */
+  color: white;        /* text color when selected */
 }
