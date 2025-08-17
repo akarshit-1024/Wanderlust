@@ -13,3 +13,11 @@ module.exports.listingSchema=joi.object({
         location:joi.string().required(),
     }).required()
 });
+
+module.exports.reviewSchema=joi.object({
+    review:joi.object({
+        rating:joi.number().required()
+        .min(1).max(5), // rating should be between 1 and 5
+        comment:joi.string().required()
+    }).required()
+});
