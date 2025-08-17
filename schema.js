@@ -20,4 +20,4 @@ module.exports.reviewSchema=joi.object({
         .min(1).max(5), // rating should be between 1 and 5
         comment:joi.string().required()
     }).required()
-});
+});//
