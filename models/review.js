@@ -8,8 +8,9 @@ const reviewSchema = new Schema({
         min: 1,
         max: 5,
     },
-    Comment: {
-        type: String
+    comment: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
