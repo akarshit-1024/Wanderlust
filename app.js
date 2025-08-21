@@ -4,6 +4,7 @@ const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate"); 
 const ExpressError=require("./utils/ExpressError.js");
+const session=require("express-session");
 
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
