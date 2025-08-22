@@ -5,6 +5,7 @@ const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate"); 
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
+const flash=require("connect-flash");
 
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
@@ -18,7 +19,26 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended:true}));
 
+const sessionOption={
+    secret:"thisshouldbeabettersecret!",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+4*24*60*60*1000, // 4 days
+        maxAge:4*24*60*60*1000, // 4 days
+        httpOnly:true, // 
+        secure:false  // set to true if using HTTPS
+    }
+}
 
+app.use(session(sessionOption));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.sucess=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
+});
 
 //connect to MongoDB
 
