@@ -6,6 +6,8 @@ const ejsMate=require("ejs-mate");
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
 const flash=require("connect-flash");
+const passport=require("passport");
+const passportLocal=require("passport-local");
 
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
@@ -33,6 +35,8 @@ const sessionOption={
 
 app.use(session(sessionOption));
 app.use(flash());
+
+app.use(passport.initialize());
 
 app.use((req,res,next)=>{
     res.locals.sucess=req.flash("success");
