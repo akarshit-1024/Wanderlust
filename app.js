@@ -7,10 +7,12 @@ const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
-const passportLocal=require("passport-local");
+const LocalStrategy=require("passport-local");
+const User=require("./models/user.js");
 
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
+const userRoutes=require("./routes/user.js");
 
 const app=express();
 
@@ -37,6 +39,11 @@ app.use(session(sessionOption));
 app.use(flash());
 
 app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());   
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
     res.locals.sucess=req.flash("success");
@@ -60,6 +67,7 @@ async function main(){
 
 app.use("/listinges", listingRoutes); // Use the listing routes 
 app.use("/listinges/:id/reviews",reviewRoutes);
+app.use("/",userRoutes); // Use the user routes 
 
 //404 error handler
 app.all(/.*/,(req,res,next)=>{
