@@ -9,9 +9,7 @@ const userSchema=new schema({
         unique:true
     }
 });
-
-const User=mongoose.model("User",userSchema);
-
-User.plugin(passportLocalMongoose);
-
-module.exports=User;
+ 
+userSchema.plugin(passportLocalMongoose);
+ 
+module.exports=mongoose.model("User",userSchema);
