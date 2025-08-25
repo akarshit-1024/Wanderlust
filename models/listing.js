@@ -13,8 +13,8 @@ const listingSchema=new Schema({
     },
     image:{
         type:String,
-        default:"https://th.bing.com/th/id/OIP.jc9F2K6hEUYrWuCvoV1K4gHaFj?w=210&h=180&c=7&r=0&o=5&cb=iwc2&dpr=1.3&pid=1.7",
-        set:(v)=>v===""?"https://th.bing.com/th/id/OIP.jc9F2K6hEUYrWuCvoV1K4gHaFj?w=210&h=180&c=7&r=0&o=5&cb=iwc2&dpr=1.3&pid=1.7":v,
+        default:"https://c4.wallpaperflare.com/wallpaper/756/599/630/man-made-udaipur-hotel-hotel-india-wallpaper-preview.jpg",
+        set:(v)=>v===""?"https://c4.wallpaperflare.com/wallpaper/756/599/630/man-made-udaipur-hotel-hotel-india-wallpaper-preview.jpg":v,
          // if image is not provided, set a default value
     },  
     price:{
@@ -36,7 +36,11 @@ const listingSchema=new Schema({
     reviews:[{
         type:Schema.Types.ObjectId,
         ref:"Review",
-    }]
+    }],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+    }
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
