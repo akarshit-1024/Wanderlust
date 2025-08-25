@@ -2,18 +2,28 @@
   <div class="container-fluid">
     <i class="fa-solid fa-compass-drafting navbar-icon me-3 ms-4"></i>
     <a class="navbar-brand" href="/listinges">Wanderlust</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      
-    </button>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    ></button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav"> 
+      <div class="navbar-nav">
         <a class="nav-link" href="/listinges">All Listing</a>
         <a class="nav-link" href="/listinges/new">Add New Listing</a>
       </div>
       <div class="navbar-nav ms-auto me-2">
+        <% if(!currentUser){ %>
         <a class="nav-link" href="/signup">Sign up</a>
         <a class="nav-link" href="/login">Log in</a>
+        <%} %>
+        <% if(currentUser){ %>
         <a class="nav-link" href="/logout">Log out</a>
+        <%}%>
       </div>
     </div>
   </div>
