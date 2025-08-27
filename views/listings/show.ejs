@@ -13,7 +13,7 @@
       <p class="fw-medium"><%= listing.country%></p>
       <p class="fw-medium">&#8377; <%= listing.price.toLocaleString("en-IN")%></p>
     </div>
-    <% if(currentUser && currentUser._id.equals(listing.owner._id)){ %>
+     <% if(currentUser && currentUser._id.equals(listing.owner._id)){ %>
     <div class="col-md-6 offset-3" id="btn-setting">
       <form action="/listinges/<%=listing.id%>/edit" method="GET">
         <button class="btn btn-dark">Edit</button>
@@ -25,7 +25,8 @@
     </div>
     <% } %>
     <div class="col-8 offset-2 text-bold">
-      <hr />
+      <%if(currentUser){%>
+        <hr />
       <h2>Review</h2>
       <form
         action="/listinges/<%=listing.id%>/reviews"
@@ -53,6 +54,7 @@
         <div class="invalid-feedback">write comment</div>
         <button type="submit" class="btn btn-dark mt-2 mb-2">Submit</button>
       </form>
+      <%}%>
       <!-- this is for show all comment -->
       <div class="row">
       <hr />
@@ -60,12 +62,14 @@
       <% for(review of listing.reviews){ %>
       <div class="card col-5 ms-3 mb-3 p-2" id="show-review">
         <div class="card-body">
-          <h6 class="card-title">Akarshit Maurya</h6>
+          <h6 class="card-title"><%=review.author.username%></h6>
           <p class="card-text"><%=review.comment%></p>
           <p class="card-text"><%=review.rating%> star</p>
+          <%if(currentUser && review.author._id.equals(currentUser._id)){%>
           <form action="/listinges/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
           <button class="btn btn-sm btn-dark">Delete</button>
           </form>
+          <%}%>
         </div>
        </div>
          <% } %>
