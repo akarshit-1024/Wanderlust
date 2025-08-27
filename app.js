@@ -10,6 +10,7 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
 
+
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
 const userRoutes=require("./routes/user.js");
@@ -48,6 +49,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.sucess=req.flash("success");
     res.locals.error=req.flash("error");
+    res.locals.currentUser=req.user;
     next();
 });
 
