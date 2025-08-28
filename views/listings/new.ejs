@@ -3,7 +3,7 @@
   <h2 class="offset-3 mt-3 mb-3">Create new listing</h2>
   <div class="offset-3 row">
     <div class="col-8">
-  <form action="/listinges" method="POST" class="needs-validation" novalidate>
+  <form action="/listinges" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
@@ -31,9 +31,9 @@
       />
     </div>
     <div class="mb-3">
-      <label for="imgUrl" class="form-label">Image Link/URL</label>
+      <label for="imgUrl" class="form-label">Upload Image</label>
       <input
-        type="text"
+        type="file"
         class="form-control"
         name="listingObj[image]"
         id="imgUrl"
