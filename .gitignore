@@ -1,5 +1,4 @@
-node_modules/ 
-classroom/ 
+.gitignore/
+node_modules/
 show-ejs-tamplate.text/
-
-.env
+classroom/
