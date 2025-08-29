@@ -11,10 +11,9 @@ const listingSchema=new Schema({
         type:String,
         required:true,
     },
-    image:{
-        type:String,
-        default:"https://c4.wallpaperflare.com/wallpaper/756/599/630/man-made-udaipur-hotel-hotel-india-wallpaper-preview.jpg",
-        set:(v)=>v===""?"https://c4.wallpaperflare.com/wallpaper/756/599/630/man-made-udaipur-hotel-hotel-india-wallpaper-preview.jpg":v,
+    image:{ 
+        url:String,
+        filename:String,
          // if image is not provided, set a default value
     },  
     price:{
