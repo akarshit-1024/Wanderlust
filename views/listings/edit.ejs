@@ -1,57 +1,83 @@
 <% layout("/layouts/boilerplate") -%>
-<body>
-  <h1 class="text-center mt-4 mb-4">Update your Profile</h1>
-  <form action="/listinges/<%=data._id%>?_method=PUT" method="POST">
-    <div class="mb-3 col-6 offset-3">
-      <label for="title" class="form-label">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        name="listingObj[title]"
-        value="<%= data.title %>"
-        id="title"
-        aria-describedby="emailHelp"
-      />
-    </div>
+<h1 class="text-center mt-4 mb-4">Update your Profile</h1>
+<form
+  action="/listinges/<%=data._id%>?_method=PUT"
+  method="POST"
+  enctype="multipart/form-data"
+  class="col-6 offset-3"
+>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      name="listingObj[title]"
+      value="<%= data.title %>"
+      id="title"
+      aria-describedby="emailHelp"
+    />
+  </div>
 
-    <div class="mb-3 col-6 offset-3">
-      <label for="description" class="form-label">Descrption</label>
+  <div class="mb-3">
+    <label for="description" class="form-label">Descrption</label>
+    <input
+      type="text"
+      class="form-control"
+      name="listingObj[description]"
+      value="<%= data.description %>"
+      id="description"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Old listing image</label><br>
+    <img
+      src="<%= originalImageUrl %>"
+      alt="Old listing image"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="imgUrl" class="form-label">Upload Image</label>
+    <input
+      type="file"
+      class="form-control"
+      name="listingObj[image]"
+      id="imgUrl"
+    />
+  </div>
+  <div class="row mb-3">
+    <div class="col-4">
+      <label for="price" class="form-label">Price</label>
       <input
-        type="text"
+        type="number"
         class="form-control"
-        name="listingObj[description]"
-        value="<%= data.description %>"
-        id="description"
-        aria-describedby="emailHelp"
+        name="listingObj[price]"
+        value="<%= data.price %>"
+        id="price"
       />
     </div>
-
-    <div class="mb-3 col-6 offset-3">
-      <label for="location" class="form-label">Location </label>
+    <div class="col-8">
+      <label for="country" class="form-label">Country</label>
       <input
         type="text"
-        class="form-control"
-        name="listingObj[location]"
-        value="<%= data.location %>"
-        id="location"
-        aria-describedby="emailHelp"
-      />
-    </div>
-    <div class="mb-3 col-6 offset-3">
-      <input type="number" class="form-control" name="listingObj[price]"
-      value="<%= data.price.toLocaleString("en-IN") %>" placeholder="Price"
-      aria-label="Price" />
-    </div>
-    <div class="mb-3 col-6 offset-3">
-      <input
-        type="text"
+        id="country"
         class="form-control"
         name="listingObj[country]"
         value="<%= data.country %>"
         placeholder="Country"
-        aria-label="Country"
       />
     </div>
-    <button class="btn btn-primary offset-3">Update</button>
-  </form>
-</body>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">Location </label>
+    <input
+      type="text"
+      class="form-control"
+      name="listingObj[location]"
+      value="<%= data.location %>"
+      id="location"
+    />
+  </div>
+
+  <button class="btn btn-success">Update</button>
+</form>
