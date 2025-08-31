@@ -32,13 +32,22 @@ module.exports.showListing=async (req, res) => {
 }
 module.exports.editROute=async (req, res) => {
     let { id } = req.params;
-    const findData = await Listing.findById(id);
-    //console.log(req.user+"........."+currentUser);
-    res.render("./listings/edit.ejs", { data: findData });
+    const data = await Listing.findById(id);
+    
+    let originalUrl=data.image.url;
+    let originalImageUrl=originalUrl.replace("/upload","/upload/w_300,h_200");
+
+    res.render("./listings/edit.ejs", { data,originalImageUrl });
 };
 module.exports.updateListing=async (req, res) => {
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listingObj });
+    let listing=await Listing.findByIdAndUpdate(id, { ...req.body.listingObj });
+    
+    if(typeof req.file!=="undifined"){
+    let {path,filename}=req.file;
+    listing.image={url:path,filename:filename};
+    await listing.save();
+    }
     req.flash("success", "Listing updated sucessfully!");
     res.redirect(`/listinges/${id}`);
 };
