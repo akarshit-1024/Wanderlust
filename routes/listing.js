@@ -11,17 +11,16 @@ const upload = multer({ storage }); // configure multer to save files to 'upload
 router.route("/")
     .get(wrapAsync(contListing.index))                                 /*index route*/
     .post(isLogIn,
-        
-        upload.single('listingObj[image]'),
-        wrapAsync(contListing.createNewListing))  /*create route*/
+        upload.single('listingObj[image]'), 
+        ValidateListing,
+        wrapAsync(contListing.createNewListing))                     /*create route*/
 //create route
-router.get("/new", isLogIn, contListing.createNewListingForm);
-//save route
-router
-//open listing route
+router.get("/new", isLogIn, contListing.createNewListingForm);            /*new route*/
+
 router.route("/:id")
-    .get(wrapAsync(contListing.showListing))                                         /*show route*/
-    .put(isLogIn, isOwner, ValidateListing, wrapAsync(contListing.updateListing))   /*update route*/
+    .get(wrapAsync(contListing.showListing))                                          /*show route*/
+    .put(isLogIn, isOwner,upload.single('listingObj[image]'),
+     ValidateListing, wrapAsync(contListing.updateListing))                         /*update route*/
     .delete(isLogIn, isOwner, wrapAsync(contListing.distroyListing));              /*destroy route*/
 //edit route
 
