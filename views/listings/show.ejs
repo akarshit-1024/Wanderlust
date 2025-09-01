@@ -1,4 +1,9 @@
 <% layout("/layouts/boilerplate") -%>
+<script>
+  const mapToken = "<%= process.env.MAP_API_KEY %>";
+
+  const listing = <%- JSON.stringify(listing) %>;
+</script>
 <h3 class="offset-3 mt-4"><%= listing.title%></h3>
 
 <div class="row" id="show-1">
@@ -105,8 +110,10 @@
       <div class="card col-5 ms-3 mb-3 p-2" id="show-review">
         <div class="card-body">
           <h6 class="card-title"><%=review.author.username%></h6>
-          <p class="starability-result card-text" data-rating="3"><%=review.rating%></p>
-          <p class="card-text"><%=review.comment%></p> 
+          <p class="starability-result card-text" data-rating="3">
+            <%=review.rating%>
+          </p>
+          <p class="card-text"><%=review.comment%></p>
           <%if(currentUser && review.author._id.equals(currentUser._id)){%>
           <form
             action="/listinges/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
@@ -118,6 +125,8 @@
         </div>
       </div>
       <% } %>
+      <div id="map"></div>
     </div>
   </div>
 </div>
+<script src="/js/maps.js"></script>
