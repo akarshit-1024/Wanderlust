@@ -1,52 +1,50 @@
-body{
+body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-.warper{
+.warper {
   flex: 1;
 }
-.navbar{
-    height: 65px;
-    background-color: #fff;
+.navbar {
+  height: 65px;
+  background-color: #fff;
 }
-.navbar-icon{
-    color: #d51a1a;
-    font-size: 1.5rem;
+.navbar-icon {
+  color: #d51a1a;
+  font-size: 1.5rem;
 }
-.nav-link{
-    color:#222 !important;
+.nav-link {
+  color: #222 !important;
 }
-.card-f{
-    height: 120px !important;
-    border: none;
-
+.card-f {
+  height: 120px !important;
+  border: none;
 }
-.fa-brands{
-    font-size: 1.5rem !important;
-    margin: 3px;
-
+.fa-brands {
+  font-size: 1.5rem !important;
+  margin: 3px;
 }
 /* cards */
-.card-2{
-    border: none;
-    margin-bottom: 2rem;
+.card-2 {
+  border: none;
+  margin-bottom: 2rem;
 }
-.card-img-top{
-    border-radius: 1rem;
-    width: 100%;
-    object-fit: cover;
+.card-img-top {
+  border-radius: 1rem;
+  width: 100%;
+  object-fit: cover;
 }
-.card-body{
-    padding: 0;
+.card-body {
+  padding: 0;
 }
 /* card-effect */
-.card-img-overlay{
-    opacity:0 ;
+.card-img-overlay {
+  opacity: 0;
 }
-.card-img-overlay:hover{
-    opacity: 0.2;
-    background-color: #fff;
+.card-img-overlay:hover {
+  opacity: 0.2;
+  background-color: #fff;
 }
 /*footer section area*/
 /* Footer styling */
@@ -77,7 +75,7 @@ body{
 }
 /* footer section area end*/
 /*listing image*/
-#show-1{
+#show-1 {
   margin-bottom: 20px;
 }
 #listing-img {
@@ -86,17 +84,22 @@ body{
   border-radius: 10px;
   margin-bottom: 20px;
 }
-#btn-setting{
+#btn-setting {
   display: flex;
   align-items: first baseline;
-
 }
 ::selection {
   background: #eb4863; /* your custom highlight color */
-  color: white;        /* text color when selected */
+  color: white; /* text color when selected */
 }
 /*show-review*/
 /* #show-review {
   width: 18rem;padding: 5px;
   margin: 5px;
 } */
+
+/* Map section */
+#map {
+  height: 500px;
+  width: 100%;
+}
