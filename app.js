@@ -18,6 +18,7 @@ const User=require("./models/user.js");
 const listingRoutes=require("./routes/listing.js");
 const reviewRoutes=require("./routes/review.js");
 const userRoutes=require("./routes/user.js");
+const legalRoutes=require("./routes/legal.js");
 
 const app=express();
 
@@ -74,6 +75,7 @@ async function main(){
 app.use("/listinges", listingRoutes); // Use the listing routes 
 app.use("/listinges/:id/reviews",reviewRoutes);
 app.use("/",userRoutes); // Use the user routes 
+app.use("/",legalRoutes);
 
 //404 error handler
 app.all(/.*/,(req,res,next)=>{
