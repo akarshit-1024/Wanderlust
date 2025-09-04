@@ -64,7 +64,10 @@ body {
   margin: 0 10px;
   cursor: pointer;
 }
-
+.footer-icons a{
+  text-decoration: none;
+  color: #000;
+}
 .footer-copy {
   margin-bottom: 8px;
 }
