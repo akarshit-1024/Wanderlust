@@ -1,5 +1,7 @@
 <% layout("/layouts/boilerplate") -%> 
+<%- include("../include/mininavbar") %>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  
   <% for(let data of allDataOfListings){ %>
   <!--  Bootstrap card -->
   <a href="/listinges/<%=data._id%>" class="text-decoration-none">
@@ -16,7 +18,7 @@
           <b><%= data.title%></b><br />
           <%= data.location%><br />
           &#8377;<%= data.price.toLocaleString("en-IN")%> /night
-          <b class="priceGst">&nbsp; + 18 % GST</b>
+          <b class="price-gst">&nbsp;+ 18 % GST</b>
         </p>
       </div>
     </div>
