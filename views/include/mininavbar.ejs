@@ -1,0 +1,187 @@
+  <style>
+    /* Navbar wrapper */
+    .navbar-nav-wrapper {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      scroll-behavior: smooth;
+      scroll-snap-type: x proximity;
+      max-width: 55vw; /* adjustable */
+    }
+    .navbar-nav-wrapper::-webkit-scrollbar { display: none; } /* Chrome/WebKit */
+
+    .navbar-nav {
+      flex-wrap: nowrap;
+      gap: .3rem;
+    }
+
+    .navWrap {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Nav items */
+    .nav-item {
+      scroll-snap-align: start;
+      min-width: 100px;
+      text-align: center;
+      opacity: .7;
+    }
+    .nav-item:hover{
+      opacity: 1;
+    }
+
+    .nav-Link {
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 0.75rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #333;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    
+    .nav-Link i {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .nav-Link p {
+      font-size: 0.8rem;
+      margin: 0;
+    }
+    
+    /* Prev/Next buttons */
+    #nextBtn, #prevBtn {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* Hide with fade instead of d-none */
+    .hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Toggle button section */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 1rem;
+      border: 2px solid rgb(112, 100, 100);
+      padding: .5rem .5rem;
+    }
+    .toggle-btn p {
+      margin: 0;
+      font-size: 0.85rem;
+    }
+    .price-gst{
+      display: none;
+    }
+  </style>
+
+
+  <nav class="navbar navbar-expand-md bg-body-light p-2 rounded">
+    <!-- Prev -->
+    <button class="btn btn-outline-secondary me-2 hidden" id="prevBtn" aria-label="Previous">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <!-- Scrollable nav -->
+    <div class="navbar-nav-wrapper flex-grow-1" id="navWrap">
+      <ul class="navbar-nav flex-row" id="navList">
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-mountain-city"></i><p>Iconic Cities</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-mountain"></i><p>Mountain</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-person-swimming"></i><p>Pool</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-cow"></i><p>Farms</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-campground"></i><p>Camping</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-city"></i><p>Castals</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-igloo"></i><p>Domes</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-snowflake"></i><p>Snowflake</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-water"></i><p>Lakes</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-sailboat"></i><p>Boating</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-tree"></i><p>Nature</p></a></li>
+        <li class="nav-item"><a class="nav-Link" href="#"><i class="fa-solid fa-fire"></i><p>Campfire</p></a></li>
+      </ul>
+    </div>
+
+    <!-- Next -->
+    <button class="btn btn-outline-secondary ms-2" id="nextBtn" aria-label="Next">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- Toggle -->
+    <div class="toggle-btn ms-auto rounded-pill">
+      <p>Display total before taxes</p>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="toggleBtn">
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    const wrap = document.getElementById('navWrap');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    let priceToogelBtn=document.getElementById("toggleBtn");
+  
+    priceToogelBtn.addEventListener('click',()=>{
+      let textInfo=document.getElementsByClassName('price-gst');
+      for(info of textInfo){
+      if(info.style.display!="inline"){
+        info.style.display="inline";
+      }else{
+        info.style.display="none";
+      }
+        
+      }
+  });
+
+    let STEP = 0;
+
+    function computeStep() {
+      STEP = Math.max(80, Math.round(wrap.clientWidth * 0.9));
+    }
+
+    function atStart() {
+      return wrap.scrollLeft <= 0;
+    }
+
+    function atEnd() {
+      const max = wrap.scrollWidth - wrap.clientWidth;
+      return wrap.scrollLeft >= max - 1;
+    }
+
+    function updateUI() {
+      prev.classList.toggle('hidden', atStart());
+      prev.disabled = atStart();
+      next.disabled = atEnd();
+    }
+
+    next.addEventListener('click', () => {
+      computeStep();
+      wrap.scrollBy({ left: STEP, behavior: 'smooth' });
+    });
+
+    prev.addEventListener('click', () => {
+      computeStep();
+      wrap.scrollBy({ left: -STEP, behavior: 'smooth' });
+    });
+
+    wrap.addEventListener('scroll', updateUI);
+    window.addEventListener('resize', () => { computeStep(); updateUI(); });
+
+    // Init
+    computeStep();
+    updateUI();
+  </script>
