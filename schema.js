@@ -8,7 +8,8 @@ module.exports.listingSchema=joi.object({
         description:joi.string().required(),
         image:joi.string().uri().allow('',null), // allow empty string for image
         price:joi.number().required()
-        .min(0), // price should be a positive number
+        .min(0),
+        listingType:joi.string().required(), // price should be a positive number
         country:joi.string().required(),
         location:joi.string().required(),
     }).required()
