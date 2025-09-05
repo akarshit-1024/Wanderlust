@@ -1,7 +1,7 @@
-.gitignore/
+
 node_modules/
-show-ejs-tamplate.text/
-classroom/
+
+
 
 #secrets/
 .env
