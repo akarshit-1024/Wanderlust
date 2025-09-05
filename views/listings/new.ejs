@@ -1,91 +1,129 @@
 <% layout("/layouts/boilerplate") -%>
-<body class="wraper">
-  <h2 class="offset-3 mt-3 mb-3">Create new listing</h2>
-  <div class="offset-3 row">
-    <div class="col-8">
-  <form action="/listinges" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        name="listingObj[title]"
-        id="title"
-        placeholder="Title of your place"
-        required
-      />
-      <!-- <div class="valid-feedback">
-        Looks good!
-      </div> -->
-    </div>
+<body class="wrapper bg-light">
+  <div class="container mb-2">
+    <h2 class="text-center mb-4">Create New Listing</h2>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <form
+          action="/listinges"
+          method="POST"
+          class="needs-validation p-4 shadow rounded bg-white"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              name="listingObj[title]"
+              id="title"
+              placeholder="Title of your place"
+              required
+            />
+          </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Descrption</label>
-      <input
-        type="text"
-        class="form-control"
-        name="listingObj[description]"
-        id="description"
-        placeholder="About this place"
-        required
-      />
-    </div>
-    <div class="mb-3">
-      <label for="imgUrl" class="form-label">Upload Image</label>
-      <input
-        type="file"
-        class="form-control"
-        name="listingObj[image]"
-        id="imgUrl"
-      /> 
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="priceInput" class="form-label">Price</label>
-        <input
-          type="number"
-          id="priceInput"
-          class="form-control"
-          name="listingObj[price]"
-          placeholder="₹ 2,000"
-          aria-label="Price"
-          required
-          min="0"
-          
-        />
-      </div>
-      <div class="col-md-8">
-        <label for="countryInput" class="form-label">Country</label>
-        <input
-          type="text"
-          id="countryInput"
-          class="form-control"
-          name="listingObj[country]"
-          placeholder="India"
-          aria-label="Country"
-          required
-        />
-      </div>
-      
-    </div>
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              name="listingObj[description]"
+              id="description"
+              rows="3"
+              placeholder="Tell something about this place..."
+              required
+            ></textarea>
+          </div>
 
-    <div class="mb-3">
-      <label for="location" class="form-label">Location </label>
-      <input
-        type="text"
-        class="form-control"
-        name="listingObj[location]"
-        id="location"
-        placeholder="Bareilly,Uttar Pradesh"
-        aria-describedby="emailHelp"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a valid location.
+          <!-- Image Upload -->
+          <div class="mb-3">
+            <label for="imgUrl" class="form-label">Upload Image</label>
+            <input
+              type="file"
+              class="form-control"
+              name="listingObj[image]"
+              id="imgUrl"
+            />
+          </div>
+
+          <!-- Price & Type -->
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="priceInput" class="form-label">Price</label>
+              <input
+                type="number"
+                id="priceInput"
+                class="form-control"
+                name="listingObj[price]"
+                placeholder="₹ 2,000"
+                required
+                min="0"
+              />
+            </div>
+            <div class="col-md-8">
+              <label for="typeSelect" class="form-label">Select Type</label>
+              <select
+                class="form-select"
+                id="typeSelect"
+                name="listingObj[listingType]"
+                required
+              >
+                <option value="" selected disabled>
+                  Select which type of place this is
+                </option>
+                <option value="Iconic Cities">Iconic Cities</option>
+                <option value="Mountain">Mountain</option>
+                <option value="Pool">Pool</option>
+                <option value="Farms">Farms</option>
+                <option value="Camping">Camping</option>
+                <option value="Castles">Castles</option>
+                <option value="Domes">Domes</option>
+                <option value="Snowflake">Snowflake</option>
+                <option value="Lakes">Lakes</option>
+                <option value="Nature">Nature</option>
+                <option value="Campfire">Campfire</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Country -->
+          <div class="mb-3">
+            <label for="countryInput" class="form-label">Country</label>
+            <input
+              type="text"
+              id="countryInput"
+              class="form-control"
+              name="listingObj[country]"
+              placeholder="India"
+              required
+            />
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input
+              type="text"
+              class="form-control"
+              name="listingObj[location]"
+              id="location"
+              placeholder="Bareilly, Uttar Pradesh"
+              required
+            />
+            <div class="invalid-feedback">Please provide a valid location.</div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+              Submit Listing
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-    <button class="btn btn-primary">submit</button>
-  </form>
-  </div>
   </div>
 </body>
