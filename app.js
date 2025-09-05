@@ -9,6 +9,7 @@ const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate"); 
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
+const MongoStore = require('connect-mongo');
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
@@ -29,8 +30,34 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended:true}));
 
+
+const dbUrl=process.env.ATLASDB_URL;
+
+main().then(()=>{
+    console.log("Connected to MongoDB");
+}).catch(err=>{
+    throw new Error("Failed to connect to MongoDB: " + err.message);
+});
+
+async function main(){
+    await mongoose.connect(dbUrl);
+} 
+
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*3600,
+});
+
+store.on("error",()=>{
+    console.log("error in mongo atlas store",err);
+});
+
 const sessionOption={
-    secret:"thisshouldbeabettersecret!",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -40,6 +67,8 @@ const sessionOption={
         secure:false  // set to true if using HTTPS
     }
 }
+
+
 
 app.use(session(sessionOption));
 app.use(flash());
@@ -56,21 +85,7 @@ app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     res.locals.currentUser=req.user;
     next();
-});
-
-//connect to MongoDB
-
-const MONGO_URL="mongodb://127.0.0.1:27017/Wanderlust";
-
-main().then(()=>{
-    console.log("Connected to MongoDB");
-}).catch(err=>{
-    throw new Error("Failed to connect to MongoDB: " + err.message);
-});
-
-async function main(){
-    await mongoose.connect(MONGO_URL);
-} 
+}); 
 
 app.use("/listinges", listingRoutes); // Use the listing routes 
 app.use("/listinges/:id/reviews",reviewRoutes);
