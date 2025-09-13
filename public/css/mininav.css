@@ -1,0 +1,234 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  z-index: 100;
+  padding: 2px;
+  /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); */
+  gap: 5px;
+  /* max-width: 1200px; */
+  /* margin: 0 auto; */
+}
+
+/* Navigation scroll wrapper */
+.nav-scroll-wrapper {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.nav-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation list */
+.nav-list {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: max-content;
+}
+
+/* Individual nav items */
+.nav-item {
+  flex-shrink: 0;
+  min-width: 100px;
+  opacity: .7;
+}
+.nav-item:hover{
+    opacity: 1;
+}
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* .nav-link:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+  transform: translateY(-1px);
+} */
+
+/* .nav-link.active {
+  background-color: #3b82f6;
+  color: white;
+} */
+
+.nav-link i {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.nav-link span {
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Navigation control buttons */
+.nav-control-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-control-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  transform: scale(1.05);
+}
+
+.nav-control-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.nav-control-btn.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Toggle section */
+.toggle-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 25px;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.toggle-text {
+  font-size: 14px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* Custom switch */
+.switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.switch.active {
+  background: #3b82f6;
+}
+
+.switch-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.switch.active .switch-handle {
+  transform: translateX(20px);
+}
+
+/* Price elements (hidden by default) */
+.price-gst {
+  display: none;
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .toggle-section {
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .toggle-text {
+    font-size: 12px;
+  }
+
+  .nav-link {
+    padding: 10px 12px;
+    min-width: 75px;
+  }
+
+  .nav-link span {
+    font-size: 11px;
+  }
+
+  .nav-control-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toggle-section {
+    display: none; /* Hide toggle on very small screens */
+  }
+
+  .nav-link {
+    padding: 8px 10px;
+    min-width: 65px;
+  }
+
+  .nav-link i {
+    font-size: 16px;
+  }
+}
+
+/* Smooth scrolling indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-scroll-wrapper:hover .scroll-indicator {
+  width: 100%;
+}
