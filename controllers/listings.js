@@ -4,12 +4,12 @@ const axios = require("axios");
 
 module.exports.index = async (req, res) => {
     const listinges = await Listing.find();
-    res.render("./listings/index.ejs", { allDataOfListings: listinges });
+    res.render("./listings/index.ejs", { allDataOfListings: listinges,title:"MyBnB" });
 
 };
 
 module.exports.createNewListingForm = (req, res) => {
-    res.render("./listings/new.ejs");
+    res.render("./listings/new.ejs",{title:"Add New Listing!"});
 
 };
 
@@ -47,7 +47,7 @@ module.exports.showListing = async (req, res) => {
         req.flash("error", "Listing not found!");
         return res.redirect("/listinges");
     }
-    res.render("./listings/show.ejs", { listing: findData });
+    res.render("./listings/show.ejs", { listing: findData ,title:'Show MyBnB'});
 }
 module.exports.editROute = async (req, res) => {
     let { id } = req.params;
@@ -56,7 +56,7 @@ module.exports.editROute = async (req, res) => {
     let originalUrl = data.image.url;
     let originalImageUrl = originalUrl.replace("/upload", "/upload/w_300,h_200");
 
-    res.render("./listings/edit.ejs", { data, originalImageUrl });
+    res.render("./listings/edit.ejs", { data, originalImageUrl,title:'Edit MyBnB' });
 };
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
