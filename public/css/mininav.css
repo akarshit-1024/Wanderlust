@@ -1,4 +1,4 @@
-.navbar {
+.mini-navbar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,12 +8,13 @@
   padding: 2px;
   /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); */
   gap: 5px;
+  margin: 20px auto;
+  position: relative;
   /* max-width: 1200px; */
-  /* margin: 0 auto; */
-}
+} 
 
 /* Navigation scroll wrapper */
-.nav-scroll-wrapper {
+.mini-nav-scroll-wrapper {
   flex: 1;
   overflow-x: auto;
   overflow-y: hidden;
@@ -23,12 +24,12 @@
   position: relative;
 }
 
-.nav-scroll-wrapper::-webkit-scrollbar {
+.mini-nav-scroll-wrapper::-webkit-scrollbar {
   display: none;
 }
 
 /* Navigation list */
-.nav-list {
+.mini-nav-list {
   display: flex;
   gap: 8px;
   list-style: none;
@@ -38,15 +39,17 @@
 }
 
 /* Individual nav items */
-.nav-item {
+.mini-nav-item {
   flex-shrink: 0;
   min-width: 100px;
   opacity: .7;
 }
-.nav-item:hover{
-    opacity: 1;
+
+.mini-nav-item:hover {
+  opacity: 1;
 }
-.nav-link {
+
+.mini-nav-link {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,32 +61,31 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  opacity: .7;
 }
 
-/* .nav-link:hover {
-  background-color: #f3f4f6;
-  color: #374151;
-  transform: translateY(-1px);
-} */
+.mini-nav-link:hover {
+  opacity: 1;
+}
 
-/* .nav-link.active {
+.mini-nav-link.active {
   background-color: #3b82f6;
   color: white;
-} */
+}
 
-.nav-link i {
+.mini-nav-link i {
   font-size: 18px;
   margin-bottom: 6px;
 }
 
-.nav-link span {
+.mini-nav-link span {
   font-size: 12px;
   font-weight: 400;
   text-align: center;
 }
 
 /* Navigation control buttons */
-.nav-control-btn {
+.mini-nav-control-btn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -98,25 +100,25 @@
   flex-shrink: 0;
 }
 
-.nav-control-btn:hover:not(:disabled) {
+.mini-nav-control-btn:hover:not(:disabled) {
   background-color: #f9fafb;
   border-color: #d1d5db;
   transform: scale(1.05);
 }
 
-.nav-control-btn:disabled {
+.mini-nav-control-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.nav-control-btn.hidden {
+.mini-nav-control-btn.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
 /* Toggle section */
-.toggle-section {
+.mini-toggle-section {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -127,14 +129,14 @@
   flex-shrink: 0;
 }
 
-.toggle-text {
+.mini-toggle-text {
   font-size: 14px;
   color: #374151;
   white-space: nowrap;
 }
 
 /* Custom switch */
-.switch {
+.mini-switch {
   position: relative;
   width: 44px;
   height: 24px;
@@ -144,11 +146,11 @@
   transition: background 0.3s ease;
 }
 
-.switch.active {
+.mini-switch.active {
   background: #3b82f6;
 }
 
-.switch-handle {
+.mini-switch-handle {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -160,7 +162,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.switch.active .switch-handle {
+.mini-switch.active .mini-switch-handle {
   transform: translateX(20px);
 }
 
@@ -173,53 +175,53 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .navbar {
+  .mini-navbar {
     padding: 12px;
     gap: 8px;
   }
 
-  .toggle-section {
+  .mini-toggle-section {
     flex-direction: column;
     gap: 6px;
     padding: 8px 12px;
   }
 
-  .toggle-text {
+  .mini-toggle-text {
     font-size: 12px;
   }
 
-  .nav-link {
+  .mini-nav-link {
     padding: 10px 12px;
     min-width: 75px;
   }
 
-  .nav-link span {
+  .mini-nav-link span {
     font-size: 11px;
   }
 
-  .nav-control-btn {
+  .mini-nav-control-btn {
     width: 36px;
     height: 36px;
   }
 }
 
 @media (max-width: 480px) {
-  .toggle-section {
+  .mini-toggle-section {
     display: none; /* Hide toggle on very small screens */
   }
 
-  .nav-link {
+  .mini-nav-link {
     padding: 8px 10px;
     min-width: 65px;
   }
 
-  .nav-link i {
+  .mini-nav-link i {
     font-size: 16px;
   }
 }
 
 /* Smooth scrolling indicator */
-.scroll-indicator {
+.mini-scroll-indicator {
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -229,6 +231,6 @@
   transition: width 0.3s ease;
 }
 
-.nav-scroll-wrapper:hover .scroll-indicator {
+.mini-nav-scroll-wrapper:hover .mini-scroll-indicator {
   width: 100%;
 }
