@@ -1,89 +1,11 @@
-<style>
-  .search-btn {
-    display: flex;
-    align-items: center;
-  }
-
-  .search-btn span {
-    margin-inline-start: 0.5rem;
-    font-size: 1rem;
-  }
-
-  .navbar-icon {
-    font-size: 1.5rem;
-    color: #dc3545;
-  }
-
-  /* Mobile hamburger menu fixes */
-  @media (max-width: 991.98px) {
-    .navbar-collapse {
-      background-color: #ffffff;
-      margin-top: 15px;
-      padding: 20px;
-      border-radius: 8px;
-      z-index: 200;
-      /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-                border: 1px solid #e9ecef;*/
-    }
-
-    /* Ensure proper spacing between navbar sections */
-    .navbar-nav {
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #e9ecef;
-    }
-
-    .navbar-nav:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    /* Make search form mobile-friendly */
-    .d-flex[role="search"] {
-      flex-direction: column;
-      width: 100%;
-      gap: 10px;
-    }
-    /* Style nav links for mobile */
-    .nav-link {
-      padding: 12px 0;
-      text-align: center;
-      margin-bottom: 5px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-link:hover {
-      background-color: #f8f9fa;
-      transform: translateY(-1px);
-    }
-
-    /* Remove automatic margins on mobile */
-    .ms-auto {
-      margin-left: 0 !important;
-    }
-
-    .me-2 {
-      margin-right: 0 !important;
-    }
-  }
-
-  /* Ensure navbar doesn't interfere with content flow */
-  .navbar {
-    position: relative;
-    z-index: 1;
-  }
-</style>
-
-<nav class="navbar navbar-expand-lg bg-body-dark border-bottom sticky-top">
+<link rel="stylesheet" href="/css/navStyle.css">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a href="/listinges"
-      ><i class="fa-solid fa-compass-drafting navbar-icon me-3 ms-4"></i
-    ></a>
-    <a class="nav-link navbar-brand" href="/listinges">Explore</a>
-
-    <!-- <a class="navbar-brand" href="/listinges">Wanderlust</a> -->
+    <a class="navbar-brand ms-4" href="/listinges">
+      <i class="fa-solid fa-compass-drafting navbar-icon me-2"></i>
+      Explore
+    </a>
+    
     <button
       class="navbar-toggler"
       type="button"
@@ -95,7 +17,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!---->
+   
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">
@@ -114,12 +36,12 @@
       <div class="navbar-nav ms-auto me-2">
         <a class="nav-link" href="/listinges/new">MyBnB your home</a>
         <% if(!currentUser){ %>
-        <a class="nav-link" href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
+        <a class="nav-link fw-bold" href="/signup">Sign up</a>
+        <a class="nav-link fw-bold" href="/login">Log in</a>
         <%} %> <% if(currentUser){ %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <a class="nav-link fw-bold" href="/logout">Log out</a>
         <%}%>
       </div>
     </div>
   </div>
-</nav>
+</nav> 
