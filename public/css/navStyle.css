@@ -1,0 +1,44 @@
+  .search-btn {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-btn span {
+    margin-inline-start: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .navbar-icon {
+    font-size: 1.5rem;
+    color: #dc3545;
+  }
+
+  /* Mobile hamburger menu fixes */
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      background-color: #ffffff;
+      margin-top: 15px;
+      padding: 20px;
+      border-radius: 8px;
+    } 
+
+    /* Ensure proper spacing between navbar sections */
+    .navbar-nav {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .navbar-nav:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* Make search form mobile-friendly */
+    .d-flex[role="search"] {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+  } 
