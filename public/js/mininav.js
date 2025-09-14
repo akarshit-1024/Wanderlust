@@ -4,7 +4,7 @@ class ResponsiveNavbar {
         this.prevBtn = document.getElementById('prevBtn');
         this.nextBtn = document.getElementById('nextBtn');
         this.toggleSwitch = document.getElementById('toggleSwitch');
-        this.navLinks = document.querySelectorAll('.nav-link');
+        this.navLinks = document.querySelectorAll('.mini-nav-link'); // Updated selector
 
         this.scrollStep = 200;
         this.isToggleActive = false;
