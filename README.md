@@ -1,37 +1,41 @@
-# 🌍 Wanderlust
+# Wanderlust – Full Stack Rental Listing Platform
 
-A travel listing web application where users can explore, create, and manage travel destinations.  
-Built with **Node.js**, **Express**, **MongoDB**, and **EJS** for a full-stack experience.
+[![GitHub stars](https://img.shields.io/github/stars/akarshit-1024/Wanderlust?style=social)](https://github.com/akarshit-1024/Wanderlust/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/akarshit-1024/Wanderlust?style=social)](https://github.com/akarshit-1024/Wanderlust/network)
 
-## 🚀 Features
-- 📝 Create, edit, and delete travel listings
-- 📍 View detailed information about destinations
-- 🖼️ Upload images for each listing
-- 🔒 User authentication & authorization
-- 📱 Responsive UI
-- ⚠️ Custom error handling with error pages
+A full-stack rental listing platform built with **Node.js, Express.js, MongoDB Atlas, Bootstrap, Cloudinary, and MapTiler API**. Users can explore, create, and manage property listings with a responsive UI and secure authentication.
 
-## 🛠️ Tech Stack
-- **Backend:** Node.js, Express.js
-- **Frontend:** EJS, HTML, CSS, Bootstrap
-- **Database:** MongoDB (Mongoose ODM)
-- **Authentication:** Passport.js
-- **Other:** Multer (file uploads), Mapbox (optional for location maps)
+---
 
-## 📂 Folder Structure
-```
-Wanderlust/
-│
-├── public/ # Static files (CSS, JS, images)
-├── views/ # EJS templates
-├── routes/ # Express route files
-├── models/ # Mongoose models
-├── middleware/ # Custom middleware
-├── app.js # Main application entry
-└── package.json
-```
+## 🚀 Live Demo
 
-## ⚡ Getting Started
+[Try the live project here](https://mybnb-project-y01g.onrender.com/listinges)
+
+---
+
+## 🛠️ Features
+
+- **Secure Authentication & Authorization**: User login and registration with role-based access.
+- **Property Management**: Full CRUD operations for property listings and user profiles.
+- **Interactive Maps**: Integrated **Mapbox API** for property location visualization.
+- **Media Management**: Optimized image storage using **Cloudinary**.
+- **Responsive Design**: Mobile-first design using **Bootstrap**.
+- **Deployment**: Hosted on **Render** with CI/CD via GitHub.
+
+---
+
+## 💻 Tech Stack
+
+- **Backend**: Node.js, Express.js  
+- **Database**: MongoDB Atlas  
+- **Frontend**: HTML, CSS, Bootstrap  
+- **APIs & Services**: MapTiler API, Cloudinary  
+- **Architecture**: MVC (Model-View-Controller)  
+- **Deployment**: Render, GitHub CI/CD  
+
+---
+
+## 📦 Installation
 
 ### 1️⃣ Clone the repository
 ```bash
@@ -43,11 +47,31 @@ cd Wanderlust
 npm install
 
 ### 3️⃣ Setup environment variables
-
-MONGO_URI=your_mongodb_connection_string
-SECRET=your_session_secret
+```
+PORT=8080
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+SESSION_SECRET=your_session_secret
+MAPTILER_TOKEN=your_mapTiler_token
+```
 
 ### 4️⃣ Run the application
 
-npm start
+node app.js
+
+🧠 Key Learnings
+
+- Implemented MVC architecture for clean and maintainable code.
+- Worked with Express.js sessions & middleware for authentication.
+- Managed database operations with MongoDB Atlas & Compass.
+- Integrated third-party APIs (Mapbox) and handled media with Cloudinary.
+- Learned to secure configuration using .env files.
+
+## Screenshots
+
+![Screenshot 2025-09-15 130414](https://github.com/user-attachments/assets/6b7f319e-aa80-4d66-beda-56039782be2f)
+
+
 
