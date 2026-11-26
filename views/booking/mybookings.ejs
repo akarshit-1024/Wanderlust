@@ -1,0 +1,223 @@
+
+<% layout("/layouts/boilerplate") -%>
+
+<div class="container my-5">
+
+  <!-- Page Heading -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">My Bookings</h2>
+      <p class="text-secondary mb-0">
+        Manage and track all your reservations.
+      </p>
+    </div>
+
+    <a href="/listings" class="btn btn-primary mt-3 mt-md-0">
+      <i class="bi bi-plus-lg me-2"></i>
+      Explore More Places
+    </a>
+  </div>
+
+  <hr class="mb-4">
+
+  <!-- Booking Count -->
+  <div class="mb-4">
+    <h5 class="fw-semibold">
+      Your Reservations
+      <span class="badge bg-primary ms-2">
+        <%= bookings.length %>
+      </span>
+    </h5>
+  </div>
+
+  <% if (bookings.length === 0) { %>
+
+    <!-- Empty Booking State -->
+    <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
+
+      <i class="bi bi-calendar-x text-secondary"
+         style="font-size: 65px;"></i>
+
+      <h4 class="fw-bold mt-3">No Bookings Yet!</h4>
+
+      <p class="text-secondary">
+        You haven't made any reservations yet.
+        Discover amazing destinations and book your next stay.
+      </p>
+
+      <div>
+        <a href="/listings" class="btn btn-primary px-4 mt-2">
+          Explore Listings
+        </a>
+      </div>
+
+    </div>
+
+  <% } else { %>
+
+    <!-- Booking Cards -->
+    <div class="row g-4">
+
+      <% bookings.forEach((booking) => { %>
+
+        <div class="col-12">
+
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+            <div class="row g-0">
+
+              <!-- Property Image -->
+              <div class="col-md-4">
+
+                <% if (booking.listing) { %>
+
+                  <img
+                    src="<%= booking.listing.image.url %>"
+                    class="w-100 h-100"
+                    style="min-height: 240px; object-fit: cover;"
+                    alt="Property Image"
+                  >
+
+                <% } else { %>
+
+                  <div class="bg-light d-flex align-items-center justify-content-center h-100"
+                       style="min-height: 240px;">
+                    <span class="text-secondary">
+                      Property unavailable
+                    </span>
+                  </div>
+
+                <% } %>
+
+              </div>
+
+              <!-- Booking Details -->
+              <div class="col-md-8">
+
+                <div class="card-body p-4">
+
+                  <div class="d-flex justify-content-between flex-wrap gap-2">
+
+                    <div>
+                      <h5 class="fw-bold mb-1">
+
+                        <% if (booking.listing) { %>
+                          <%= booking.listing.title %>
+                        <% } else { %>
+                          Deleted Property
+                        <% } %>
+
+                      </h5>
+
+                      <p class="text-secondary small mb-2">
+
+                        <% if (booking.listing) { %>
+                          <i class="bi bi-geo-alt-fill me-1"></i>
+                          <%= booking.listing.country %>
+                        <% } %>
+
+                      </p>
+                    </div>
+
+                    <span class="badge <%= booking.bookingStatus === 'Confirmed' ? 'bg-success' : 'bg-danger' %> align-self-start">
+                      <%= booking.bookingStatus %>
+                    </span>
+
+                  </div>
+
+                  <hr>
+
+                  <!-- Dates and Guests -->
+                  <div class="row g-3 mb-3">
+
+                    <div class="col-sm-4">
+                      <small class="text-secondary">
+                        <i class="bi bi-calendar-check me-1"></i>
+                        Check-in
+                      </small>
+
+                      <p class="fw-semibold mb-0">
+                        <%= new Date(booking.checkIn).toLocaleDateString("en-IN") %>
+                      </p>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <small class="text-secondary">
+                        <i class="bi bi-calendar-x me-1"></i>
+                        Check-out
+                      </small>
+
+                      <p class="fw-semibold mb-0">
+                        <%= new Date(booking.checkOut).toLocaleDateString("en-IN") %>
+                      </p>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <small class="text-secondary">
+                        <i class="bi bi-people me-1"></i>
+                        Guests
+                      </small>
+
+                      <p class="fw-semibold mb-0">
+                        <%= booking.guests %> Guests
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <hr>
+
+                  <!-- Price and Payment -->
+                  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    <div>
+                      <small class="text-secondary">
+                        Total Amount
+                      </small>
+
+                      <h4 class="fw-bold text-primary mb-0">
+                        ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+                      </h4>
+                    </div>
+
+                    <div class="text-end">
+
+                      <span class="badge <%= booking.paymentStatus === 'Paid' ? 'bg-success' : 'bg-warning text-dark' %>">
+                        Payment: <%= booking.paymentStatus %>
+                      </span>
+
+                      <p class="small text-secondary mt-2 mb-0">
+                        Booking ID: <%= booking._id.toString().slice(-8) %>
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                  <div class="mt-3">
+
+                    <a
+                      href="/booking/confirmation/<%= booking._id %>"
+                      class="btn btn-outline-primary btn-sm"
+                    >
+                      <i class="bi bi-eye me-1"></i>
+                      View Booking Details
+                    </a>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+
+</div>

@@ -29,6 +29,7 @@ module.exports.userLogIn=async (req, res) => {
         res.redirect(redirectUrl); 
 
 };
+
 module.exports.userLogOut=(req, res) => {
     req.logout((err) => {
         if (err) {

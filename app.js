@@ -20,7 +20,7 @@ const listingRoutes = require("./routes/listing.js");
 const reviewRoutes = require("./routes/review.js");
 const userRoutes = require("./routes/user.js");
 const legalRoutes = require("./routes/legal.js");
-
+const bookingRoutes=require("./routes/booking.js")
 const app = express();
 
 app.engine("ejs", ejsMate);
@@ -106,7 +106,7 @@ app.use("/listinges", listingRoutes); // Use the listing routes
 app.use("/listinges/:id/reviews", reviewRoutes);
 app.use("/", userRoutes); // Use the user routes 
 app.use("/", legalRoutes);
-
+app.use("/booking",bookingRoutes);
 //404 error handler
 app.all(/.*/, (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));

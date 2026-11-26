@@ -22,7 +22,15 @@
     <div class="col-md-6">
       <p class="fw-medium"><%= listing.description %></p>
       <p class="fw-medium"><%= listing.country %></p>
-      <p class="fw-medium">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+      <div class="row">
+        <div class="col-sm-8">
+           <p class="fw-medium">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+        </div>
+        <div class="col-sm-4">
+          <a class="btn btn-primary" href="/booking/<%= listing.id %>">Book Now</a>
+        </div>
+      </div>
+      
     </div>
   </div>
 

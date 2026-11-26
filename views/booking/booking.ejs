@@ -1,0 +1,286 @@
+
+<% layout("/layouts/boilerplate") -%>
+
+<div class="container my-5">
+  <div class="row g-4">
+
+    <div class="col-12 text-center">
+      <h3 class="fw-bold">BOOKING</h3>
+      <p class="text-secondary">Complete your reservation</p>
+    </div>
+
+    <!-- Reservation Details -->
+    <div class="col-lg-7">
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+
+        <h4 class="fw-bold mb-4">
+          <i class="bi bi-calendar3 text-primary me-2"></i>
+          Reservation Details
+        </h4>
+
+        <img
+          src="<%= listing.image.url %>"
+          class="img-fluid rounded-3 w-100 mb-3"
+          style="height: 180px; object-fit: cover;"
+          alt="Hotel"
+        />
+
+        <h5 class="fw-bold"><%= listing.title %></h5>
+
+        <p class="text-secondary mb-2">
+          <i class="bi bi-geo-alt-fill"></i>
+          <%= listing.country %>
+        </p>
+
+        <h4 class="text-primary fw-bold mb-4">
+          <%= listing.price.toLocaleString("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+          }) %>
+          <small class="text-secondary fs-6">/ night</small>
+        </h4>
+
+        <form action="/booking/<%= listing._id %>" method="POST" id="bookingForm">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              Check-in Date
+            </label>
+            <input
+              type="date"
+              name="checkIn"
+              id="checkIn"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              Check-out Date
+            </label>
+            <input
+              type="date"
+              name="checkOut"
+              id="checkOut"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">
+              Guests
+            </label>
+            <select name="guests" class="form-select" required>
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 py-2 fw-semibold"
+          >
+            <i class="bi bi-building me-2"></i>
+            Confirm Booking
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Booking Summary -->
+    <div class="col-lg-5">
+      <div class="card border-0 shadow-sm rounded-4 p-4 bg-primary-subtle">
+
+        <h5 class="fw-bold mb-4">
+          <i class="bi bi-tag-fill text-primary me-2"></i>
+          Booking Summary
+        </h5>
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <img
+            src="<%= listing.image.url %>"
+            width="90"
+            height="65"
+            class="rounded-3 object-fit-cover"
+            alt="Hotel"
+          />
+
+          <div>
+            <h6 class="fw-bold mb-1"><%= listing.title %></h6>
+            <small class="text-secondary">
+              <i class="bi bi-geo-alt-fill"></i>
+              <%= listing.country %>
+            </small>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <span>Price per night</span>
+          <strong id="pricePerNight">₹0</strong>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <span>Number of nights</span>
+          <strong id="nightsText">0 nights</strong>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <span>Room Total</span>
+          <strong id="roomTotal">₹0</strong>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <span>Service Fee</span>
+          <strong id="serviceFee">₹0</strong>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <span>Total Amount</span>
+          <span class="text-primary" id="totalAmount">₹0</span>
+        </div>
+
+        <p class="text-secondary small mt-3 mb-0">
+          * Select check-in and check-out dates to calculate your booking amount.
+        </p>
+
+        <div class="text-center my-4">
+          <i class="bi bi-shield-fill-check text-success fs-2"></i>
+          <p class="small text-secondary mb-0">
+            Your booking is secure<br />
+            and protected
+          </p>
+        </div>
+
+        <img
+          src="<%= listing.image.url %>"
+          class="img-fluid rounded-3 w-100"
+          style="height: 150px; object-fit: cover;"
+          alt="Hotel"
+        />
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Booking Calculation JavaScript -->
+<script>
+
+  const PRICE = Number("<%= listing.price %>");
+  const SERVICE_FEE = 500;
+
+  const checkIn = document.getElementById("checkIn");
+  const checkOut = document.getElementById("checkOut");
+  const bookingForm = document.getElementById("bookingForm");
+
+  const fmt = (amount) =>
+    "₹" + amount.toLocaleString("en-IN");
+
+  // Get today's local date
+  function getLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = getLocalDate(new Date());
+
+  // Prevent past dates
+  checkIn.min = today;
+  checkOut.min = today;
+
+  // Display price
+  document.getElementById("pricePerNight").textContent = fmt(PRICE);
+
+  function updateSummary() {
+
+    let nights = 0;
+
+    if (checkIn.value && checkOut.value) {
+
+      const start = new Date(checkIn.value + "T00:00:00");
+      const end = new Date(checkOut.value + "T00:00:00");
+
+      const difference = end - start;
+
+      nights = Math.max(
+        0,
+        Math.round(difference / 86400000)
+      );
+    }
+
+    const roomTotal = nights * PRICE;
+    const fee = nights > 0 ? SERVICE_FEE : 0;
+    const total = roomTotal + fee;
+
+    document.getElementById("nightsText").textContent =
+      nights + (nights === 1 ? " night" : " nights");
+
+    document.getElementById("roomTotal").textContent =
+      fmt(roomTotal);
+
+    document.getElementById("serviceFee").textContent =
+      fmt(fee);
+
+    document.getElementById("totalAmount").textContent =
+      fmt(total);
+  }
+
+  // Check-in date change
+  checkIn.addEventListener("change", function() {
+
+    if (checkIn.value) {
+
+      const nextDate = new Date(checkIn.value + "T00:00:00");
+
+      nextDate.setDate(nextDate.getDate() + 1);
+
+      const minCheckout = getLocalDate(nextDate);
+
+      checkOut.min = minCheckout;
+
+      if (checkOut.value && checkOut.value < minCheckout) {
+        checkOut.value = "";
+      }
+    } else {
+      checkOut.min = today;
+    }
+
+    updateSummary();
+  });
+
+  // Check-out date change
+  checkOut.addEventListener("change", updateSummary);
+
+  // Prevent invalid booking
+  bookingForm.addEventListener("submit", function(event) {
+
+    if (!checkIn.value || !checkOut.value) {
+      event.preventDefault();
+      alert("Please select check-in and check-out dates.");
+      return;
+    }
+
+    if (checkOut.value <= checkIn.value) {
+      event.preventDefault();
+      alert("Check-out date must be after check-in date.");
+      return;
+    }
+
+  });
+
+  // Initial calculation
+  updateSummary();
+
+</script>
