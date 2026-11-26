@@ -1,4 +1,5 @@
-{"engines": {
+{
+  "engines": {
   "node": "18.20.8"
 },
   "name": "wanderlast",

@@ -29,6 +29,17 @@
     />
   </div>
   <div class="mb-3">
+  <label for="listingType" class="form-label">Listing Type</label>
+  <input
+    type="text"
+    class="form-control"
+    name="listingObj[listingType]"
+    value="<%= data.listingType %>"
+    id="listingType"
+    required
+  />
+</div>
+  <div class="mb-3">
     <label class="form-label">Old listing image</label><br>
     <img
       src="<%= originalImageUrl %>"
