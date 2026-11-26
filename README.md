@@ -20,6 +20,7 @@ A full-stack rental listing platform built with **Node.js, Express.js, MongoDB A
 - **Interactive Maps**: Integrated **Mapbox API** for property location visualization.
 - **Media Management**: Optimized image storage using **Cloudinary**.
 - **Responsive Design**: Mobile-first design using **Bootstrap**.
+- **Booking Option**: Booking option is available.
 - **Deployment**: Hosted on **Render** with CI/CD via GitHub.
 
 ---
